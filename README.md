@@ -5,6 +5,7 @@ Templates para Fluxos de Trabalho diversos (Workflows)
 Um fluxo de trabalho é uma ação executada em seu repositório do Git-Hub que facilita o desenvolvimento de seu projeto. 
 Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as mais diversas tarefas, como executar comandos de PowerShell e Shell do Linux. Também podem ser executados em horários agendados como uma _Cron Job_. Praticamente você pode fazer o que quiser.
 
+Os workflows podem ser usados para testar se aplicações não tem nenhum erro de compilação antes de mesclar um Pull-Request. Isso é muito útil no desenvolvimento de projetos em equipe.
 <h2 align=center>Tem algum template de Workflow que não citei aqui? Crie um Pull-Request</h2>
 
 - ### [Deploy de arquivos por FTP](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/deploy%20FTP.yml)
