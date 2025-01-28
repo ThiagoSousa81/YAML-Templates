@@ -1,0 +1,37 @@
+# Usa PS2EXE para construir o executável de um script.ps1
+# Altere as variáveis Script e Executavel como necessário
+
+name: Gerar Executável
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      Script: caminho/para/seu/script.ps1
+      Exe: caminho/para/seu/programa.exe
+
+    steps:
+      - name: Checar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar PS2EXE
+        shell: pwsh
+        run: |
+          Install-Module -Name ps2exe -Scope CurrentUser  -Force
+
+      - name: Converter .ps1 para .exe
+        shell: pwsh
+        run: |
+          Invoke-PS2EXE -InputFile "$env:Script" -OutputFile "$env:Exe"
+
+      - name: Fazer upload do executável
+        uses: actions/upload-artifact@v4 # Lembre-se de sempre usar a versão mais recente
+        with:
+          name: programa-exe 
+          path: "$env:Exe"
