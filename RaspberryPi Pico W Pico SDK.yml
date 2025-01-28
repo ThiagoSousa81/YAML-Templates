@@ -1,0 +1,62 @@
+# Build para projeto do RaspberryPi Pico W
+# Usa ARM-GCC para compilar seu projeto e Pico SDK para construir os artefatos
+# Esse modelo está configurado para gerar .uf2 e .elf
+# Você pode liberar a sessão para gerar a pasta do build completa
+
+# Substitua nome_do_projeto pelo nome de seu projeto
+name: Build Raspberry Pi Pico W Project
+# Automação do fluxo de trabalho - Thiago Sousa - https://github.com/ThiagoSousa81
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc-arm-none-eabi build-essential
+
+      - name: Install Raspberry Pi Pico SDK
+        run: |
+          git clone -b master https://github.com/raspberrypi/pico-sdk.git
+          echo "PICO_SDK_PATH=$(pwd)/pico-sdk" >> $GITHUB_ENV
+
+      - name: Set project name
+        run: echo "PROJECT_NAME=nome_do_projeto" >> $GITHUB_ENV
+
+      - name: Create build directory
+        run: |
+          mkdir build
+          cd build
+          cmake -DPICO_SDK_PATH=$PICO_SDK_PATH -DPROJECT_NAME=$PROJECT_NAME ..
+
+      - name: Build project
+        run: |
+          cd build
+          make
+
+      - name: List build directory
+        run: |
+          ls -al build
+      
+      - name: Save artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pico-artifacts
+          path: |
+            build/${{ env.PROJECT_NAME }}.elf
+            build/${{ env.PROJECT_NAME }}.uf2
+
+          # Libere o comando abaixo se quiser que a pasta build seja carregada inteira nos artefatos
+            #path: build/*
