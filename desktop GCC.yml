@@ -1,0 +1,33 @@
+# Usa o GCC para compilar seu código em C e o MSBuild para construir uma aplicação .exe
+# Substitua principal.c pelo nome do script principal
+name: Compilar Programa C
+on:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch principal, se necessário
+jobs:
+  build:
+    runs-on: windows-latest  # Usando a imagem do Windows para gerar o .exe
+    steps:
+      - name: Fazer checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar MinGW
+        run: |
+          choco install mingw --version=8.1.0 -y
+          echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_ENV
+
+      - name: Verificar instalação do GCC
+        run: gcc --version
+
+      - name: Compilar o programa C
+        run: gcc -o program.exe principal.c  # Compila o arquivo principal.c para program.exe        
+
+      - name: Listar arquivos
+        run: dir  # Lista os arquivos no diretório atual para verificar se o .exe foi gerado
+
+      - name: Fazer upload do arquivo .exe como um artefato
+        uses: actions/upload-artifact@v3
+        with:
+          name: program-exe
+          path: program.exe  # Caminho para o arquivo .exe gerado
