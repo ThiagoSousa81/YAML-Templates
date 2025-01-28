@@ -1,0 +1,36 @@
+# Usado para realizar build de um script.sh para um arquivo executável do Linux
+# Altere as variáveis Script e BIN conforme necessário
+
+name: Gerar Binário
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      Script: caminho/para/seu/script.sh
+      BIN: caminho/para/seu/script_binario
+
+    steps:
+      - name: Checar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar shc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shc
+
+      - name: Compilar o script .sh
+        run: |
+          shc -f $env:Script -o $env:BIN
+
+      - name: Fazer upload do binário
+        uses: actions/upload-artifact@v4
+        with:
+          name: binario-executavel-linux
+          path: $env:BIN
