@@ -1,0 +1,33 @@
+# Deploy contínuo de FTP 
+# Pode ser usado normalmente para PHP, HTML, CSS, JavaScript, SVG e todo tipo de arquivo
+
+# Cuidado!!! Ele sobrescreve os arquivos no sevidor remoto!
+
+# Para usar configure os segredos:
+# FTP_SERVER
+# FTP_USERNAME
+# FTP_PASSWORD
+
+# Defina o diretório local que vai subir e onde o remoto vai receber 
+name: CI -> Deploy to My website
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Debug
+        run: |
+          echo "FTP_SERVER: ${{ secrets.FTP_SERVER }}"
+          echo "FTP_USERNAME: ${{ secrets.FTP_USERNAME }}"
+          echo "FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}"
+      - uses: actions/checkout@v4
+      - name: Upload from public_html via FTP
+        uses: airvzxf/ftp-deployment-action@latest
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "./htdocs"
+          remote_dir: "/sge-body.ebs.great-site.net/htdocs"
