@@ -3,7 +3,9 @@ Templates para Fluxos de Trabalho diversos (Workflows)
 
 ## O que é um _Workflow_?
 Um fluxo de trabalho é uma ação executada em seu repositório do Git-Hub que facilita o desenvolvimento de seu projeto. 
-Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as mais diversas tarefas, como...
+Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as mais diversas tarefas, como executar comandos de PowerShell e Shell do Linux. Também podem ser executados em horários agendados como uma _Cron Job_. Praticamente você pode fazer o que quiser.
+
+<h2 align=center>Se você tem algum template de Workflow que não citei aqui, crie um Pull-Request</h2>
 
 - ### [Deploy de arquivos por FTP](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/deploy%20FTP.yml)
 - ### [Build de Aplicações .NET C#](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20.NET%20Core.yml)
@@ -17,7 +19,6 @@ Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as m
 >
 > Planos gratuitos do Git-Hub tem uma cota de 2000 minutos de wokflow mensais
 
-Workflows podem executar comandos de PowerShell e Shell do Linux. Também podem ser executados em horários agendados como uma _Cron Job_. Praticamente você pode fazer o que quiser.
 ## Estrutura de um _Workflow_
 
     # Nome do workflow. Este nome será exibido na interface do GitHub.
