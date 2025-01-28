@@ -13,6 +13,8 @@ Os workflows podem ser usados para testar se aplicações não tem nenhum erro d
 - ### [Build de Aplicações C com GCC](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20GCC.yml)
 - ### [Build de Projetos do Raspberry Pi Pico com Pico SDK](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/RaspberryPi%20Pico%20W%20Pico%20SDK.yml) 
 - ### [Personalizar um botão de arrecadação de fundos no seu repositório ](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/FUNDING.yml)
+- ### [Gerar binário executável de script Shell](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20sh%20to%20BIN.yml)
+- ### [Gerar executável de script do PowerShell](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20ps1%20to%20exe.yml)
 
 > É importante mencionar que o uso de workflows consome uma cota em minutos de uso na sua conta do Git-Hub. Verifique sua cota constantemente, ou tente hospedar seu workflow em outra plataforma se necessário. 
 >
