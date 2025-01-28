@@ -1,0 +1,67 @@
+# Build para aplicação desktop .NET v8.0
+# Esse workflow não assina o pacote! 
+# Lembre-se de desativar a assinatura do build para usar isso
+name: .NET Core Desktop Build v8.0
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest  # Utilizando runner Windows mais recente
+
+    env:
+      Solution_Name: Solução.sln                     # Nome da solução .NET Core
+      Test_Project_Path: App\Projeto.csproj          # Caminho para o projeto de testes, se houver
+      Project_Directory: Projeto                     # Diretório do projeto para correção de caminho
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Instalar o .NET SDK
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x  # Versão do .NET Core que está sendo utilizada no projeto
+
+    # Instalar MSBuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    # Executar testes (se existirem)
+    - name: Execute unit tests
+      run: |
+        dotnet restore $env:Solution_Name
+        dotnet test $env:Solution_Name
+
+    # Restaurar a aplicação .NET Core
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    # Build da solução .NET Core
+    - name: Build the application
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    # Carregar artefatos de build (sem assinatura ou empacotamento)
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build Artifacts-${{ matrix.configuration }}§§
+        path: ${{ env.Project_Directory }}\bin\${{ matrix.configuration }}
