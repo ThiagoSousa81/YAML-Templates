@@ -27,7 +27,7 @@ jobs:
         run: dir  # Lista os arquivos no diretório atual para verificar se o .exe foi gerado
 
       - name: Fazer upload do arquivo .exe como um artefato
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Lembre-se de usar a versão mais recente 
         with:
           name: program-exe
           path: program.exe  # Caminho para o arquivo .exe gerado
