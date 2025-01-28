@@ -1,0 +1,12 @@
+# Esse é um arquivo padrão para ativar o botão de arrecadação de um repositório
+# Seu nome é "FUNDING.yml" e deve ficar na pasta "/.github/" e não na "/.github/workflows/"
+
+# Estas são plataformas de modelos de financiamento suportadas
+github: thiagosousa81 # Substitua por até 4 nomes de usuários habilitados para patrocinadores do GitHub, por exemplo, [usuário1, usuário2]
+patreon: # Ou substituir por um único nome de usuário do Patreon
+open_collective: # Ou substituir por um único nome de usuário do Open Collective
+ko_fi: # Ou substituir por um único nome de usuário Ko-fi
+tidelift: # Ou substituir por um único nome Tidelift platform-name/package-name e.g., npm/babel
+custom: 
+  - url: https://www.seusite.com/apoie
+    description: "Apoie este projeto através do nosso site"
