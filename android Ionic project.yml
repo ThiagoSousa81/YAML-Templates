@@ -1,0 +1,50 @@
+name: Build Ionic App for Android
+
+on:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch principal
+  pull_request:
+    branches:
+      - main  # Altere para o nome da sua branch principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Altere para a versão do Node.js que você está usando
+
+      - name: Install Ionic CLI
+        run: npm install -g @ionic/cli
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Add Android platform
+        run: |
+          npm install -g cordova
+          ionic capacitor add android
+
+      - name: Build the app
+        run: ionic build --prod
+
+      - name: Copy web assets to Android
+        run: ionic capacitor copy android
+
+      - name: Build Android APK
+        run: |
+          cd android
+          ./gradlew assembleDebug  # ou ./gradlew assembleRelease para uma versão de produção
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk  # Altere para o caminho do APK gerado
