@@ -1,0 +1,51 @@
+name: Build iOS App
+
+on:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch principal
+  pull_request:
+    branches:
+      - main  # Altere para o nome da sua branch principal
+      
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Ionic and Cordova
+      run: |
+        npm install -g ionic cordova
+
+    - name: Install Dependencies
+      run: |
+        npm install
+
+    - name: Build the App
+      run: |
+        ionic build
+        ionic cap add ios
+        ionic cap sync ios
+
+    - name: Install CocoaPods
+      run: |
+        cd ios
+        pod install
+
+    - name: Build iOS App
+      run: |
+        xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphoneos -configuration Release archive -archivePath ${{ github.workspace }}/YourApp.xcarchive
+
+    - name: Export IPA
+      run: |
+        xcodebuild -exportArchive -archivePath ${{ github.workspace }}/YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ${{ github.workspace }}/YourApp.ipa
