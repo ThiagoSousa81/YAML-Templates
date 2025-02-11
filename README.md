@@ -8,6 +8,8 @@ Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as m
 Os workflows podem ser usados para testar se aplicações não tem nenhum erro de compilação antes de mesclar um Pull-Request. Isso é muito útil no desenvolvimento de projetos em equipe.
 <h2 align=center>Tem algum template de Workflow que não citei aqui? Crie um Pull-Request</h2>
 
+- ### [Build de aplicação Ionic para Android](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/android%20Ionic%20project.yml)
+- ### [Build de aplicação Ionic para IOS](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/ios%20Ionic%20project.yml)
 - ### [Deploy de arquivos por FTP](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/deploy%20FTP.yml)
 - ### [Build de Aplicações .NET C#](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20.NET%20Core.yml)
 - ### [Build de Aplicações C com GCC](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20GCC.yml)
