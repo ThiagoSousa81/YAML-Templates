@@ -8,11 +8,7 @@ Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as m
 Os workflows podem ser usados para testar se aplicações não tem nenhum erro de compilação antes de mesclar um Pull-Request. Isso é muito útil no desenvolvimento de projetos em equipe.
 <h2 align=center>Tem algum template de Workflow que não citei aqui? Crie um Pull-Request</h2>
 
-<details><summary>
-
-Clique para ver Templates de _Workflow_ 
-
-</summary>
+<details><summary>Clique para ver Templates de <i>Workflow</i></summary>
 
 - ### [Build de aplicação Flutter para Android](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/android%20Flutter%20project.yml)
 - ### [Build de aplicação Flutter para IOS](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/ios%20Flutter%20project.yml)
