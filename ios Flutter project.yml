@@ -1,0 +1,40 @@
+name: Flutter Build iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main  # Altere para o nome da sua branch principal, se necessário
+  pull_request:
+    branches:
+      - main  # Altere para o nome da sua branch principal, se necessário
+
+jobs:
+  build:
+    runs-on: macos-latest  # Usar um runner macOS para compilar para iOS
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # Ou a versão que você preferir
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'latest'  # Ou uma versão específica do Flutter
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS
+        run: flutter build ios --release --no-codesign  # --no-codesign para evitar problemas de assinatura
+
+      - name: Upload iOS build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-ios
+          path: build/ios/iphoneos/*.app  # Ajuste o caminho conforme necessário
