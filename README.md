@@ -1,5 +1,5 @@
-# YAML-Templates
-Templates para Fluxos de Trabalho diversos (Workflows)
+<h1 align=center> YAML-Templates</h1>
+<p align=center>Templates para Fluxos de Trabalho diversos (Workflows)</p>
 
 ## O que é um _Workflow_?
 Um fluxo de trabalho é uma ação executada em seu repositório do Git-Hub que facilita o desenvolvimento de seu projeto. 
