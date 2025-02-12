@@ -8,6 +8,14 @@ Esses fluxos de trabalho são chamados de **Git-Hub Actions** e podem fazer as m
 Os workflows podem ser usados para testar se aplicações não tem nenhum erro de compilação antes de mesclar um Pull-Request. Isso é muito útil no desenvolvimento de projetos em equipe.
 <h2 align=center>Tem algum template de Workflow que não citei aqui? Crie um Pull-Request</h2>
 
+<details><summary>
+
+Clique para ver Templates de _Workflow_ 
+
+</summary>
+
+- ### [Build de aplicação Flutter para Android](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/android%20Flutter%20project.yml)
+- ### [Build de aplicação Flutter para IOS](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/ios%20Flutter%20project.yml)
 - ### [Build de aplicação Ionic para Android](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/android%20Ionic%20project.yml)
 - ### [Build de aplicação Ionic para IOS](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/ios%20Ionic%20project.yml)
 - ### [Deploy de arquivos por FTP](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/deploy%20FTP.yml)
@@ -17,6 +25,8 @@ Os workflows podem ser usados para testar se aplicações não tem nenhum erro d
 - ### [Personalizar um botão de arrecadação de fundos no seu repositório ](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/FUNDING.yml)
 - ### [Gerar binário executável de script Shell](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20sh%20to%20BIN.yml)
 - ### [Gerar executável de script do PowerShell](https://github.com/ThiagoSousa81/YAML-Templates/blob/main/desktop%20ps1%20to%20exe.yml)
+
+</details>
 
 > É importante mencionar que o uso de workflows consome uma cota em minutos de uso na sua conta do Git-Hub. Verifique sua cota constantemente, ou tente hospedar seu workflow em outra plataforma se necessário. 
 >
@@ -55,3 +65,6 @@ Os workflows podem ser usados para testar se aplicações não tem nenhum erro d
         - name: Print a message
             # Executa um comando de shell que imprime uma mensagem.
             run: echo "Hello, World! Este é meu primeiro Workflow do Git-Hub Actions!"
+
+## 🐞 Encontrei um bug...
+### Abra uma [Issue](https://github.com/ThiagoSousa81/YAML-Templates/issues/new) e vamos conversar 🧑‍💻
