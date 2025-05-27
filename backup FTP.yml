@@ -1,0 +1,62 @@
+# Download automatizado de arquivos via FTP 
+# Pode ser usado normalmente para PHP, HTML, CSS, JavaScript, SVG e todo tipo de arquivo
+
+# Para usar configure os segredos:
+# FTP_SERVER
+# FTP_USERNAME
+# FTP_PASSWORD
+
+name: Download FTP folder into htdocs and Commit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ftp-download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Criar pasta htdocs na raiz do repositório
+        run: mkdir -p htdocs
+
+      # Lembrar de definir o caminho correto dos arquivos no servidor 
+      - name: Baixar arquivos do FTP para ./htdocs usando wget
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          wget --recursive \
+            --no-parent \
+            --user="$FTP_USERNAME" \
+            --password="$FTP_PASSWORD" \
+            --directory-prefix=htdocs \
+            "ftp://$FTP_SERVER/web.ebs-systems.epizy.com/htdocs/"
+
+      - name: Mover arquivos baixados para ./htdocs
+        run: |
+          mv htdocs/ftpupload.net/web.ebs-systems.epizy.com/htdocs/* htdocs/ || true
+          mv htdocs/ftpupload.net/web.ebs-systems.epizy.com/htdocs/.[!.]* htdocs/ || true
+
+      - name: Remover pasta ftpupload.net do repositório
+        run: rm -rf htdocs/ftpupload.net
+
+      - name: Configurar Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Adicionar e commitar arquivos
+        run: |
+          git add htdocs
+          git commit -m "Baixar arquivos do FTP via wget" || echo "Nada para commitar"
+
+      - name: Push para o repositório
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
