@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main  # Altere para o nome da sua branch principal, se necessário
+      - main
   pull_request:
     branches:
-      - main  # Altere para o nome da sua branch principal, se necessário
+      - main
 
 jobs:
   build:
@@ -17,15 +17,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          java-version: '11'  # Ou a versão que você preferir
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'latest'  # Ou uma versão específica do Flutter
+          flutter-version: '3.32'
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install dependencies
         run: flutter pub get
